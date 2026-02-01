@@ -1,0 +1,1178 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Meritay Çiçekçilik | Buket Kataloğu</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Buket kataloğu: Küçük/Orta/Büyük boy seçenekleri, hızlı sipariş ve kendi buketini oluşturma." />
+  <meta name="keywords" content="çiçekçi, buket, çiçek katalog, mersin çiçekçi, çikolata, cem çiçek" />
+  <meta name="robots" content="index,follow" />
+  <meta property="og:title" content="Buket Kataloğu" />
+  <meta property="og:description" content="Müşteriler linkten buket seçebilir; küçük/orta/büyük boy sipariş verebilir." />
+  <meta property="og:type" content="website" />
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #ffffff;
+      --ink: #111827;
+      --muted: #6b7280;
+      --glass: rgba(255,255,255,.72);
+      --stroke: rgba(17,24,39,.10);
+      --shadow: 0 16px 50px rgba(17,24,39,.10);
+      --shadow-soft: 0 10px 28px rgba(17,24,39,.08);
+      --accent1: rgba(255, 99, 132, .16);  /* pembe */
+      --accent2: rgba(54, 162, 235, .14);  /* mavi */
+      --accent3: rgba(255, 205, 86, .18);  /* sarı */
+      --accent4: rgba(75, 192, 192, .16);  /* mint */
+    }
+
+    body{
+      background: var(--bg);
+      color: var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+      overflow-x: hidden;
+    }
+
+    .glass{
+      background: var(--glass);
+      border: 1px solid var(--stroke);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .hero{
+      position: relative;
+      padding: 28px 0 18px;
+      z-index: 1;
+    }
+
+    .brand-pill{
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,.55);
+    }
+
+    .title{
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .sub{
+      color: var(--muted);
+      max-width: 720px;
+    }
+
+    .topbar{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255,255,255,.80);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--stroke);
+    }
+
+    .search-input{
+      border-radius: 14px;
+      border: 1px solid var(--stroke);
+      padding-left: 40px;
+      background: rgba(255,255,255,.75);
+    }
+    .search-wrap{
+      position: relative;
+    }
+    .search-wrap i{
+      position: absolute; left: 14px; top: 50%;
+      transform: translateY(-50%);
+      color: #6b7280;
+    }
+
+    .chip{
+      border-radius: 999px;
+      padding: 8px 12px;
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,.70);
+      font-size: 12.5px;
+      color: #374151;
+      cursor: pointer;
+      user-select: none;
+      transition: .18s ease;
+    }
+    .chip.active{
+      background: rgba(17,24,39,.06);
+      border-color: rgba(17,24,39,.18);
+    }
+
+    .product-card{
+      border-radius: 18px;
+      overflow: hidden;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,.78);
+    }
+    .product-card:hover{
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+      border-color: rgba(17,24,39,.18);
+    }
+
+    .thumb{
+      height: 210px;
+      background: linear-gradient(135deg, rgba(17,24,39,.05), rgba(17,24,39,.02));
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .thumb img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .badge-soft{
+      position: absolute;
+      top: 12px; left: 12px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.85);
+      border: 1px solid var(--stroke);
+      font-size: 12px;
+    }
+
+    .p-body{
+      padding: 14px 14px 16px;
+    }
+    .p-name{
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      margin: 0;
+    }
+    .p-desc{
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+      min-height: 36px;
+    }
+
+    .size-group{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .size-btn{
+      border-radius: 12px;
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,.75);
+      padding: 10px 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: .18s ease;
+      font-size: 12.5px;
+      user-select: none;
+    }
+    .size-btn strong{ display:block; font-size: 12px; }
+    .size-btn span{ color: var(--muted); font-size: 12px; }
+    .size-btn.active{
+      background: rgba(17,24,39,.06);
+      border-color: rgba(17,24,39,.18);
+    }
+
+    .price-line{
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-top: 10px;
+      gap: 10px;
+    }
+    .price{
+      font-weight: 900;
+      font-size: 20px;
+      letter-spacing: -0.02em;
+    }
+    .price small{
+      font-weight: 700;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .btn-soft{
+      border-radius: 14px;
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,.75);
+      padding: 10px 12px;
+      transition: .18s ease;
+    }
+    .btn-soft:hover{
+      background: rgba(17,24,39,.06);
+      border-color: rgba(17,24,39,.18);
+    }
+    .btn-primary-soft{
+      border-radius: 14px;
+      border: 1px solid rgba(34,197,94,.25);
+      background: rgba(34,197,94,.12);
+      padding: 10px 12px;
+      color: #065f46;
+      font-weight: 700;
+      transition: .18s ease;
+    }
+    .btn-primary-soft:hover{
+      background: rgba(34,197,94,.18);
+      border-color: rgba(34,197,94,.40);
+      color: #064e3b;
+    }
+
+    .section-title{
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+
+    .builder-grid{
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 18px;
+    }
+    @media (max-width: 992px){
+      .builder-grid{ grid-template-columns: 1fr; }
+      .thumb{ height: 220px; }
+    }
+
+    .mini{
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .toast-wrap{
+      position: fixed;
+      right: 16px;
+      top: 76px;
+      z-index: 9999;
+    }
+
+    .footer{
+      color: var(--muted);
+      font-size: 13px;
+      padding: 22px 0 30px;
+    }
+
+    .divider{
+      height: 1px;
+      background: var(--stroke);
+      margin: 18px 0;
+    }
+
+    .anchor-offset{
+      scroll-margin-top: 98px;
+    }
+
+    .tag{
+      display: inline-flex;
+      gap: 6px;
+      align-items: center;
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(17,24,39,.05);
+      border: 1px solid rgba(17,24,39,.08);
+      color: #374151;
+      margin-right: 6px;
+      margin-top: 6px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="container py-2">
+      <div class="d-flex flex-wrap align-items-center justify-content-between gap-2">
+        <div class="d-flex align-items-center gap-2">
+          <span class="brand-pill">
+            <i class="bi bi-flower1"></i>
+            <strong>Meritay Çiçekçilik</strong>
+          </span>
+          <span class="mini d-none d-md-inline">Buket Kataloğu • Küçük / Orta / Büyük</span>
+        </div>
+
+        <div class="d-flex align-items-center gap-2 ms-auto">
+          <a class="btn btn-soft" href="#katalog"><i class="bi bi-grid-3x3-gap"></i> Katalog</a>
+          <a class="btn btn-soft" href="#builder"><i class="bi bi-magic"></i> Kendi Buketini Yap</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="container position-relative" style="z-index:1;">
+      <div class="glass rounded-4 p-4 p-md-5">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-7">
+            <h1 class="title display-6 mb-2">Buket Kataloğu</h1>
+            <p class="sub mb-3">
+              Müşteriye link at: ürün kartından <b>Link Kopyala</b> de — müşteri direkt o bukete gelsin.
+              Her bukette <b>Küçük / Orta / Büyük</b> boy seçimi ve hızlı WhatsApp siparişi var.
+            </p>
+
+            <div class="d-flex flex-wrap gap-2 align-items-center">
+              <span class="chip active" data-filter="all"><i class="bi bi-stars"></i> Hepsi</span>
+              <span class="chip" data-filter="rose"><i class="bi bi-heart"></i> Gül</span>
+              <span class="chip" data-filter="mixed"><i class="bi bi-bounding-box-circles"></i> Karışık</span>
+              <span class="chip" data-filter="orchid"><i class="bi bi-flower2"></i> Orkide</span>
+              <span class="chip" data-filter="choco"><i class="bi bi-box2-heart"></i> Çikolatalı</span>
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+            <div class="glass rounded-4 p-3">
+              <div class="search-wrap">
+                <i class="bi bi-search"></i>
+                <input id="searchInput" class="form-control search-input" placeholder="Ürün ara: örn. kırmızı gül, orkide, çikolata..." />
+              </div>
+
+              <div class="divider"></div>
+
+              <div class="d-flex flex-wrap gap-2">
+                <button class="btn btn-primary-soft" id="copyCatalogLink">
+                  <i class="bi bi-link-45deg"></i> Katalog Linkini Kopyala
+                </button>
+                <button class="btn btn-soft" id="scrollToBuilder">
+                  <i class="bi bi-magic"></i> Kendi Buketini Yap
+                </button>
+              </div>
+
+              <div class="mt-3 mini">
+                <i class="bi bi-info-circle"></i>
+                İpucu: Ürün görsellerini eklemek için aşağıdaki JS kısmında <b>image</b> alanına kendi görsel yolunu yaz.
+                (örn: <code>images/buket1.jpg</code> veya CDN linki)
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Toasts -->
+  <div class="toast-wrap" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Catalog -->
+  <main class="container pb-4" id="katalog">
+    <div class="d-flex align-items-end justify-content-between flex-wrap gap-2 mb-3">
+      <div>
+        <h2 class="section-title mb-1">Ürünler</h2>
+        <div class="mini" id="resultCount">—</div>
+      </div>
+      <div class="d-flex gap-2 align-items-center">
+        <select id="sortSelect" class="form-select" style="max-width:240px;border-radius:14px;border:1px solid var(--stroke);background:rgba(255,255,255,.75);">
+          <option value="popular">Sıralama: Önerilen</option>
+          <option value="priceAsc">Fiyat: Artan</option>
+          <option value="priceDesc">Fiyat: Azalan</option>
+          <option value="nameAsc">İsim: A → Z</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row g-3" id="catalogGrid"></div>
+  </main>
+
+  <!-- Builder -->
+  <section class="container pb-5" id="builder">
+    <div class="glass rounded-4 p-4 p-md-5">
+      <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2">
+        <div>
+          <h2 class="section-title mb-1">Kendi Buketini Oluştur</h2>
+          <div class="mini">Çiçekleri seç, adet yaz, kağıt ve aranjman ekle — toplam otomatik hesaplanır.</div>
+        </div>
+        <button class="btn btn-soft" id="builderReset"><i class="bi bi-arrow-counterclockwise"></i> Sıfırla</button>
+      </div>
+
+      <div class="builder-grid mt-3">
+        <!-- left -->
+        <div class="glass rounded-4 p-3">
+          <div class="row g-3">
+            <div class="col-md-8">
+              <label class="form-label fw-bold">Çiçek Seç</label>
+              <select id="builderFlower" class="form-select" style="border-radius:14px;border:1px solid var(--stroke);background:rgba(255,255,255,.75);"></select>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label fw-bold">Adet</label>
+              <input id="builderQty" type="number" min="1" value="1" class="form-control" style="border-radius:14px;border:1px solid var(--stroke);background:rgba(255,255,255,.75);" />
+            </div>
+
+            <div class="col-12 d-flex flex-wrap gap-2">
+              <button class="btn btn-primary-soft" id="builderAdd"><i class="bi bi-plus-lg"></i> Listeye Ekle</button>
+              <button class="btn btn-soft" id="builderClearList"><i class="bi bi-trash3"></i> Listeyi Temizle</button>
+            </div>
+
+            <div class="col-12">
+              <div class="divider"></div>
+              <label class="form-label fw-bold">Buket Kağıdı</label>
+              <select id="builderWrap" class="form-select" style="border-radius:14px;border:1px solid var(--stroke);background:rgba(255,255,255,.75);"></select>
+            </div>
+
+            <div class="col-12">
+              <label class="form-label fw-bold">Aranjman / Ekstra</label>
+              <div id="builderAddons" class="d-flex flex-wrap gap-2"></div>
+              <div class="mini mt-2"><i class="bi bi-lightning-charge"></i> Ekstralar toplam fiyata eklenir.</div>
+            </div>
+
+            <div class="col-12">
+              <div class="divider"></div>
+              <label class="form-label fw-bold">Not (İsteğe bağlı)</label>
+              <input id="builderNote" class="form-control" placeholder="örn. 'Beyaz kurdele olsun', 'Kart yazısı: Seni seviyorum'..." style="border-radius:14px;border:1px solid var(--stroke);background:rgba(255,255,255,.75);" />
+            </div>
+          </div>
+        </div>
+
+        <!-- right -->
+        <div class="glass rounded-4 p-3">
+          <div class="d-flex align-items-center justify-content-between">
+            <h5 class="mb-0 fw-bold">Seçim Özeti</h5>
+            <span class="tag"><i class="bi bi-receipt"></i> Otomatik</span>
+          </div>
+
+          <div class="divider"></div>
+
+          <div id="builderList" class="vstack gap-2"></div>
+
+          <div class="divider"></div>
+
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="mini">Ara Toplam</div>
+              <div class="fw-bold" id="builderSubtotal">₺0</div>
+            </div>
+            <div class="text-end">
+              <div class="mini">Genel Toplam</div>
+              <div class="price" id="builderTotal">₺0 <small>tahmini</small></div>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="d-grid gap-2">
+            <button class="btn btn-primary-soft" id="builderWhatsapp">
+              <i class="bi bi-whatsapp"></i> WhatsApp ile Sipariş Ver
+            </button>
+            <button class="btn btn-soft" id="builderCopyText">
+              <i class="bi bi-clipboard"></i> Sipariş Metnini Kopyala
+            </button>
+          </div>
+
+          <div class="mini mt-3">
+            <i class="bi bi-info-circle"></i>
+            Not: WhatsApp numaranızı aşağıdaki JS içinde <b>WHATSAPP_NUMBER</b> alanından yazabilirsiniz.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Modal -->
+  <div class="modal fade" id="productModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content glass" style="border-radius:22px; overflow:hidden;">
+        <div class="modal-header border-0">
+          <div>
+            <h5 class="modal-title fw-bold" id="modalTitle">Ürün</h5>
+            <div class="mini" id="modalMeta">—</div>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+        </div>
+        <div class="modal-body pt-0">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="rounded-4 overflow-hidden border" style="border-color:var(--stroke) !important;">
+                <img id="modalImg" src="" alt="" style="width:100%;height:320px;object-fit:cover;">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mini mb-2" id="modalDesc">—</div>
+
+              <div class="divider"></div>
+
+              <div class="mini">Boy Seç</div>
+              <div class="size-group" id="modalSizes"></div>
+
+              <div class="price-line">
+                <div>
+                  <div class="mini">Seçili Fiyat</div>
+                  <div class="price" id="modalPrice">₺0</div>
+                </div>
+                <div class="d-flex gap-2">
+                  <button class="btn btn-soft" id="modalCopyLink"><i class="bi bi-link-45deg"></i> Link</button>
+                  <button class="btn btn-primary-soft" id="modalWhatsapp"><i class="bi bi-whatsapp"></i> Sipariş</button>
+                </div>
+              </div>
+
+              <div class="divider"></div>
+
+              <div class="mini">
+                <i class="bi bi-shield-check"></i> Link ile müşteri direkt bu ürünü görür. Boy seçimi yapıp sipariş verir.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer border-0">
+          <button type="button" class="btn btn-soft" data-bs-dismiss="modal">Kapat</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="container footer">
+    <div class="glass rounded-4 p-3 d-flex flex-wrap align-items-center justify-content-between gap-2">
+      <div>© <span id="year"></span> Meritay Çiçekçilik • Katalog</div>
+      <div class="mini">Tek sayfa • Hızlı link paylaşımı • WhatsApp sipariş</div>
+    </div>
+  </footer>
+
+  <!-- jQuery + Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    /***************************************************************
+     *  ✅ DÜZENLEME YERLERİ
+     *  1) WHATSAPP_NUMBER: başında ülke kodu ile yaz (örn TR: 90...)
+     *  2) PRODUCTS: ürünleri çoğalt + görsellerini ekle
+     *     - image alanına kendi görsel yolunu koy
+     *  3) BUILDER_FLOWERS / WRAPS / ADDONS: kendi buketini oluşturma seçenekleri
+     ***************************************************************/
+    const WHATSAPP_NUMBER = "905425716844"; // örn: 90555xxxxxxx
+
+    // Ürünler (katalog kartları)
+    // image: kendi görsel yolun (örn: "img/buket1.jpg" veya https://...)
+    const PRODUCTS = [
+      {
+        id: "buket-kirmizi-gul-01",
+        name: "Kırmızı Gül Buketi",
+        desc: "Klasik kırmızı güller. Şık sunum, fotoğraf çekimine uygun.",
+        category: ["rose"],
+        tags: ["Gül", "Romantik"],
+        image: "https://images.unsplash.com/photo-1526045478516-99145907023c?auto=format&fit=crop&w=1200&q=70",
+        sizes: {
+          small: { label: "Küçük", price: 990 },
+          medium:{ label: "Orta",  price: 1490 },
+          large: { label: "Büyük", price: 1990 }
+        },
+        popularity: 10
+      },
+      {
+        id: "buket-beyaz-gul-02",
+        name: "Beyaz Gül Buketi",
+        desc: "Zarif beyaz güller. Minimal ama çok şık görünüm.",
+        category: ["rose","mixed"],
+        tags: ["Gül", "Zarif"],
+        image: "https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1200&q=70",
+        sizes: {
+          small: { label: "Küçük", price: 1050 },
+          medium:{ label: "Orta",  price: 1590 },
+          large: { label: "Büyük", price: 2190 }
+        },
+        popularity: 9
+      },
+      {
+        id: "buket-karisik-03",
+        name: "Karışık Mevsim Buketi",
+        desc: "Mevsime göre taze çiçekler. Renkli ve dolu dolu.",
+        category: ["mixed"],
+        tags: ["Karışık", "Renkli"],
+        image: "https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1200&q=70",
+        sizes: {
+          small: { label: "Küçük", price: 1190 },
+          medium:{ label: "Orta",  price: 1690 },
+          large: { label: "Büyük", price: 2390 }
+        },
+        popularity: 8
+      },
+      {
+        id: "buket-orkide-04",
+        name: "Orkide Aranjmanı",
+        desc: "Uzun ömürlü orkide. Modern ve premium duruş.",
+        category: ["orchid"],
+        tags: ["Orkide", "Premium"],
+        image: "https://images.unsplash.com/photo-1525310072745-f49212b5ac6d?auto=format&fit=crop&w=1200&q=70",
+        sizes: {
+          small: { label: "Küçük", price: 1790 },
+          medium:{ label: "Orta",  price: 2290 },
+          large: { label: "Büyük", price: 2990 }
+        },
+        popularity: 7
+      },
+      {
+        id: "buket-cikolatali-05",
+        name: "Çikolatalı Gül Kutusu",
+        desc: "Gül + çikolata kombin. Hediyelik özel konsept.",
+        category: ["choco","rose"],
+        tags: ["Çikolata", "Hediye"],
+        image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=70",
+        sizes: {
+          small: { label: "Küçük", price: 1390 },
+          medium:{ label: "Orta",  price: 1990 },
+          large: { label: "Büyük", price: 2790 }
+        },
+        popularity: 9
+      }
+    ];
+
+    // Builder (kendi buketini oluştur)
+    const BUILDER_FLOWERS = [
+      { id:"red_rose",  name:"Kırmızı Gül", unitPrice: 120 },
+      { id:"white_rose",name:"Beyaz Gül",   unitPrice: 130 },
+      { id:"tulip",     name:"Lale",        unitPrice: 90  },
+      { id:"daisy",     name:"Papatya",     unitPrice: 60  },
+      { id:"lily",      name:"Zambak",      unitPrice: 160 }
+    ];
+
+    const BUILDER_WRAPS = [
+      { id:"wrap_kraft", name:"Kraft (Doğal) Kağıt", price: 70 },
+      { id:"wrap_white", name:"Beyaz Şeffaf Kağıt",  price: 80 },
+      { id:"wrap_black", name:"Siyah Şeffaf Kağıt",  price: 90 },
+      { id:"wrap_pink",  name:"Pudra Şeffaf Kağıt",  price: 90 }
+    ];
+
+    const BUILDER_ADDONS = [
+      { id:"addon_ribbon", name:"Kurdele", price: 40 },
+      { id:"addon_green",  name:"Yeşillik Dolgu", price: 120 },
+      { id:"addon_box",    name:"Kutu / Çanta", price: 150 },
+      { id:"addon_choco",  name:"Çikolata Ekstra", price: 250 }
+    ];
+
+    /***************************************************************
+     *  UYGULAMA
+     ***************************************************************/
+    const fmt = (n) => `₺${Number(n).toLocaleString("tr-TR")}`;
+
+    const state = {
+      filter: "all",
+      query: "",
+      sort: "popular",
+      selections: {}, // productId -> {sizeKey}
+      builder: {
+        items: [],     // {flowerId, name, qty, unitPrice}
+        wrapId: BUILDER_WRAPS[0]?.id || null,
+        addons: new Set(),
+        note: ""
+      }
+    };
+
+    function showToast(message, icon="bi-check2-circle"){
+      const id = `t_${Date.now()}`;
+      const html = `
+        <div id="${id}" class="toast align-items-center text-bg-light border-0 glass mb-2" role="alert" aria-live="assertive" aria-atomic="true" style="border-radius:16px;">
+          <div class="d-flex">
+            <div class="toast-body">
+              <i class="bi ${icon} me-2"></i>${message}
+            </div>
+            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Kapat"></button>
+          </div>
+        </div>
+      `;
+      $(".toast-wrap").append(html);
+      const el = document.getElementById(id);
+      const t = new bootstrap.Toast(el, { delay: 2400 });
+      t.show();
+      el.addEventListener("hidden.bs.toast", () => el.remove());
+    }
+
+    function currentUrlWithoutHash(){
+      const u = new URL(window.location.href);
+      u.hash = "";
+      return u.toString();
+    }
+
+    function productUrl(productId){
+      return `${currentUrlWithoutHash()}#p-${productId}`;
+    }
+
+    function buildWhatsappUrl(text){
+      const base = `https://wa.me/${WHATSAPP_NUMBER}`;
+      return `${base}?text=${encodeURIComponent(text)}`;
+    }
+
+    function bestPriceForProduct(p){
+      // sorting helper (use medium as reference)
+      return p.sizes?.medium?.price ?? Object.values(p.sizes)[0]?.price ?? 0;
+    }
+
+    function applyFilters(products){
+      let out = [...products];
+
+      if(state.filter !== "all"){
+        out = out.filter(p => (p.category||[]).includes(state.filter));
+      }
+
+      if(state.query.trim()){
+        const q = state.query.trim().toLowerCase();
+        out = out.filter(p => {
+          const hay = [
+            p.name, p.desc,
+            ...(p.tags||[]),
+            ...(p.category||[])
+          ].join(" ").toLowerCase();
+          return hay.includes(q);
+        });
+      }
+
+      switch(state.sort){
+        case "priceAsc":
+          out.sort((a,b)=> bestPriceForProduct(a)-bestPriceForProduct(b)); break;
+        case "priceDesc":
+          out.sort((a,b)=> bestPriceForProduct(b)-bestPriceForProduct(a)); break;
+        case "nameAsc":
+          out.sort((a,b)=> (a.name||"").localeCompare(b.name||"", "tr")); break;
+        default:
+          out.sort((a,b)=> (b.popularity||0)-(a.popularity||0));
+      }
+
+      return out;
+    }
+
+    function ensureSelection(productId){
+      if(!state.selections[productId]){
+        state.selections[productId] = { sizeKey: "medium" }; // default
+      }
+      return state.selections[productId];
+    }
+
+    function renderCatalog(){
+      const filtered = applyFilters(PRODUCTS);
+      $("#resultCount").text(`${filtered.length} ürün bulundu`);
+
+      const $grid = $("#catalogGrid");
+      $grid.empty();
+
+      filtered.forEach(p=>{
+        const sel = ensureSelection(p.id);
+        const price = p.sizes[sel.sizeKey].price;
+
+        const tagsHtml = (p.tags||[]).slice(0,4).map(t => `<span class="tag"><i class="bi bi-dot"></i>${t}</span>`).join("");
+
+        const card = `
+          <div class="col-12 col-sm-6 col-lg-4 anchor-offset" id="p-${p.id}">
+            <div class="product-card h-100">
+              <div class="thumb">
+                <span class="badge-soft"><i class="bi bi-link-45deg"></i> Link ile paylaş</span>
+                <img src="${p.image}" alt="${p.name}">
+              </div>
+
+              <div class="p-body">
+                <div class="d-flex align-items-start justify-content-between gap-2">
+                  <div>
+                    <h3 class="p-name h6">${p.name}</h3>
+                    <div class="p-desc">${p.desc}</div>
+                  </div>
+                  <button class="btn btn-soft btn-sm" data-action="openModal" data-id="${p.id}" title="Detay">
+                    <i class="bi bi-eye"></i>
+                  </button>
+                </div>
+
+                <div class="mt-1">${tagsHtml}</div>
+
+                <div class="size-group" data-role="sizes" data-id="${p.id}">
+                  ${["small","medium","large"].map(k=>{
+                    const s = p.sizes[k];
+                    const active = sel.sizeKey===k ? "active" : "";
+                    return `
+                      <div class="size-btn ${active}" data-size="${k}" data-id="${p.id}">
+                        <strong>${s.label}</strong>
+                        <span>${fmt(s.price)}</span>
+                      </div>
+                    `;
+                  }).join("")}
+                </div>
+
+                <div class="price-line">
+                  <div>
+                    <div class="mini">Seçili Boy Fiyatı</div>
+                    <div class="price" data-role="price" data-id="${p.id}">${fmt(price)} <small>tahmini</small></div>
+                  </div>
+                </div>
+
+                <div class="d-flex gap-2 mt-3">
+                  <button class="btn btn-soft w-50" data-action="copyLink" data-id="${p.id}">
+                    <i class="bi bi-link-45deg"></i> Link Kopyala
+                  </button>
+                  <button class="btn btn-primary-soft w-50" data-action="whatsapp" data-id="${p.id}">
+                    <i class="bi bi-whatsapp"></i> Sipariş
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+        $grid.append(card);
+      });
+    }
+
+    function productById(id){
+      return PRODUCTS.find(p=>p.id===id);
+    }
+
+    function setProductSize(productId, sizeKey){
+      const p = productById(productId);
+      if(!p) return;
+      ensureSelection(productId).sizeKey = sizeKey;
+
+      // update card UI
+      $(`.size-btn[data-id="${productId}"]`).removeClass("active");
+      $(`.size-btn[data-id="${productId}"][data-size="${sizeKey}"]`).addClass("active");
+      $(`[data-role="price"][data-id="${productId}"]`).html(`${fmt(p.sizes[sizeKey].price)} <small>tahmini</small>`);
+    }
+
+    async function copyText(text){
+      try{
+        await navigator.clipboard.writeText(text);
+        showToast("Kopyalandı!");
+      }catch(e){
+        // fallback
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+        showToast("Kopyalandı!");
+      }
+    }
+
+    function productOrderText(p, sizeKey){
+      const size = p.sizes[sizeKey];
+      return [
+        `Merhaba, "${p.name}" sipariş vermek istiyorum.`,
+        `Boy: ${size.label}`,
+        `Fiyat: ${fmt(size.price)}`,
+        `Ürün Linki: ${productUrl(p.id)}`,
+        `Not: (varsa yazabilirsiniz)`
+      ].join("\n");
+    }
+
+    // Modal
+    let modalProductId = null;
+    let modalSizeKey = "medium";
+    const modal = new bootstrap.Modal(document.getElementById("productModal"));
+
+    function openProductModal(productId){
+      const p = productById(productId);
+      if(!p) return;
+
+      const sel = ensureSelection(productId);
+      modalProductId = productId;
+      modalSizeKey = sel.sizeKey;
+
+      $("#modalTitle").text(p.name);
+      $("#modalMeta").text((p.tags||[]).join(" • ") || "—");
+      $("#modalDesc").text(p.desc);
+      $("#modalImg").attr("src", p.image).attr("alt", p.name);
+
+      const sizesHtml = ["small","medium","large"].map(k=>{
+        const s = p.sizes[k];
+        const active = (k===modalSizeKey) ? "active" : "";
+        return `
+          <div class="size-btn ${active}" data-role="modalSize" data-size="${k}">
+            <strong>${s.label}</strong>
+            <span>${fmt(s.price)}</span>
+          </div>
+        `;
+      }).join("");
+
+      $("#modalSizes").html(sizesHtml);
+      $("#modalPrice").text(fmt(p.sizes[modalSizeKey].price));
+
+      modal.show();
+    }
+
+    function updateModalPrice(){
+      const p = productById(modalProductId);
+      if(!p) return;
+      $("#modalPrice").text(fmt(p.sizes[modalSizeKey].price));
+    }
+
+    // Builder
+    function renderBuilderOptions(){
+      // flowers
+      $("#builderFlower").html(
+        BUILDER_FLOWERS.map(f=>`<option value="${f.id}">${f.name} • ${fmt(f.unitPrice)} / adet</option>`).join("")
+      );
+
+      // wraps
+      $("#builderWrap").html(
+        BUILDER_WRAPS.map(w=>`<option value="${w.id}">${w.name} • ${fmt(w.price)}</option>`).join("")
+      );
+      state.builder.wrapId = BUILDER_WRAPS[0]?.id || null;
+
+      // addons
+      $("#builderAddons").html(
+        BUILDER_ADDONS.map(a=>{
+          return `
+            <label class="chip" style="display:inline-flex;gap:8px;align-items:center;">
+              <input type="checkbox" class="form-check-input m-0" data-addon="${a.id}">
+              <span>${a.name} • ${fmt(a.price)}</span>
+            </label>
+          `;
+        }).join("")
+      );
+    }
+
+    function builderTotals(){
+      const itemsTotal = state.builder.items.reduce((sum,it)=> sum + (it.qty*it.unitPrice), 0);
+      const wrapPrice = (BUILDER_WRAPS.find(w=>w.id===state.builder.wrapId)?.price) || 0;
+      const addonsTotal = Array.from(state.builder.addons).reduce((sum,aid)=>{
+        const a = BUILDER_ADDONS.find(x=>x.id===aid);
+        return sum + (a?.price || 0);
+      },0);
+      const total = itemsTotal + wrapPrice + addonsTotal;
+      return { itemsTotal, wrapPrice, addonsTotal, total };
+    }
+
+    function renderBuilderList(){
+      const $list = $("#builderList");
+      $list.empty();
+
+      if(state.builder.items.length === 0){
+        $list.append(`<div class="mini">Henüz çiçek eklemediniz.</div>`);
+      }else{
+        state.builder.items.forEach((it, idx)=>{
+          const row = `
+            <div class="glass rounded-4 p-2 d-flex align-items-center justify-content-between gap-2">
+              <div>
+                <div class="fw-bold">${it.name} <span class="mini">x${it.qty}</span></div>
+                <div class="mini">${fmt(it.unitPrice)} / adet • Ara: ${fmt(it.qty*it.unitPrice)}</div>
+              </div>
+              <button class="btn btn-soft btn-sm" data-action="builderRemove" data-idx="${idx}">
+                <i class="bi bi-x-lg"></i>
+              </button>
+            </div>
+          `;
+          $list.append(row);
+        });
+      }
+
+      const t = builderTotals();
+      $("#builderSubtotal").text(fmt(t.itemsTotal));
+      $("#builderTotal").html(`${fmt(t.total)} <small>tahmini</small>`);
+    }
+
+    function builderOrderText(){
+      const t = builderTotals();
+      const wrap = BUILDER_WRAPS.find(w=>w.id===state.builder.wrapId);
+      const addons = Array.from(state.builder.addons).map(aid => BUILDER_ADDONS.find(a=>a.id===aid)?.name).filter(Boolean);
+
+      const lines = [];
+      lines.push("Merhaba, kendi buketimi oluşturmak istiyorum:");
+      lines.push("");
+      if(state.builder.items.length){
+        lines.push("Çiçekler:");
+        state.builder.items.forEach(it=>{
+          lines.push(`- ${it.name} x${it.qty} (${fmt(it.unitPrice)}/adet)`);
+        });
+        lines.push("");
+      }else{
+        lines.push("Çiçekler: (Henüz seçilmedi)");
+        lines.push("");
+      }
+
+      lines.push(`Buket Kağıdı: ${wrap ? wrap.name : "—"} (${fmt(wrap?.price || 0)})`);
+      if(addons.length){
+        lines.push(`Ekstralar: ${addons.join(", ")} (${fmt(t.addonsTotal)})`);
+      }else{
+        lines.push("Ekstralar: Yok");
+      }
+
+      if(state.builder.note.trim()){
+        lines.push("");
+        lines.push(`Not: ${state.builder.note.trim()}`);
+      }
+
+      lines.push("");
+      lines.push(`Toplam: ${fmt(t.total)} (tahmini)`);
+
+      return lines.join("\n");
+    }
+
+    function resetBuilder(){
+      state.builder.items = [];
+      state.builder.wrapId = BUILDER_WRAPS[0]?.id || null;
+      state.builder.addons = new Set();
+      state.builder.note = "";
+      $("#builderQty").val(1);
+      $("#builderWrap").val(state.builder.wrapId);
+      $("#builderNote").val("");
+      $("#builderAddons input[type='checkbox']").prop("checked", false);
+      renderBuilderList();
+    }
+
+    // Init
+    $(function(){
+      $("#year").text(new Date().getFullYear());
+
+      // chips filter
+      $(".chip[data-filter]").on("click", function(){
+        $(".chip[data-filter]").removeClass("active");
+        $(this).addClass("active");
+        state.filter = $(this).data("filter");
+        renderCatalog();
+      });
+
+      // search
+      $("#searchInput").on("input", function(){
+        state.query = $(this).val();
+        renderCatalog();
+      });
+
+      // sort
+      $("#sortSelect").on("change", function(){
+        state.sort = $(this).val();
+        renderCatalog();
+      });
+
+      // catalog events (delegated)
+      $(document).on("click", ".size-btn[data-id]", function(){
+        const productId = $(this).data("id");
+        const sizeKey = $(this).data("size");
+        setProductSize(productId, sizeKey);
+      });
+
+      $(document).on("click", "[data-action='copyLink']", function(){
+        const id = $(this).data("id");
+        copyText(productUrl(id));
+      });
+
+      $(document).on("click", "[data-action='whatsapp']", function(){
+        const id = $(this).data("id");
+        const p = productById(id);
+        const sizeKey = ensureSelection(id).sizeKey;
+        const msg = productOrderText(p, sizeKey);
+        window.open(buildWhatsappUrl(msg), "_blank");
+      });
+
+      $(document).on("click", "[data-action='openModal']", function(){
+        openProductModal($(this).data("id"));
+      });
+
+      // modal size click
+      $(document).on("click", "[data-role='modalSize']", function(){
+        $("[data-role='modalSize']").removeClass("active");
+        $(this).addClass("active");
+        modalSizeKey = $(this).data("size");
+        // sync selection to card too
+        setProductSize(modalProductId, modalSizeKey);
+        updateModalPrice();
+      });
+
+      $("#modalCopyLink").on("click", function(){
+        if(!modalProductId) return;
+        copyText(productUrl(modalProductId));
+      });
+
+      $("#modalWhatsapp").on("click", function(){
+        if(!modalProductId) return;
+        const p = productById(modalProductId);
+        const msg = productOrderText(p, modalSizeKey);
+        window.open(buildWhatsappUrl(msg), "_blank");
+      });
+
+      // top buttons
+      $("#copyCatalogLink").on("click", function(){
+        copyText(currentUrlWithoutHash() + "#katalog");
+      });
+      $("#scrollToBuilder").on("click", function(){
+        document.querySelector("#builder").scrollIntoView({behavior:"smooth"});
+      });
+
+      // Builder init
+      renderBuilderOptions();
+      renderBuilderList();
+
+      $("#builderAdd").on("click", function(){
+        const fid = $("#builderFlower").val();
+        const qty = Math.max(1, parseInt($("#builderQty").val() || "1", 10));
+        const f = BUILDER_FLOWERS.find(x=>x.id===fid);
+        if(!f) return;
+
+        // aynı çiçek varsa birleştir
+        const existing = state.builder.items.find(it => it.flowerId === fid);
+        if(existing){
+          existing.qty += qty;
+        }else{
+          state.builder.items.push({ flowerId: fid, name: f.name, qty, unitPrice: f.unitPrice });
+        }
+        renderBuilderList();
+        showToast("Listeye eklendi!", "bi-plus-circle");
+      });
+
+      $("#builderClearList").on("click", function(){
+        state.builder.items = [];
+        renderBuilderList();
+        showToast("Liste temizlendi.", "bi-trash3");
+      });
+
+      $(document).on("click", "[data-action='builderRemove']", function(){
+        const idx = parseInt($(this).data("idx"), 10);
+        state.builder.items.splice(idx, 1);
+        renderBuilderList();
+      });
+
+      $("#builderWrap").on("change", function(){
+        state.builder.wrapId = $(this).val();
+        renderBuilderList();
+      });
+
+      $(document).on("change", "#builderAddons input[type='checkbox']", function(){
+        const id = $(this).data("addon");
+        if(this.checked) state.builder.addons.add(id);
+        else state.builder.addons.delete(id);
+        renderBuilderList();
+      });
+
+      $("#builderNote").on("input", function(){
+        state.builder.note = $(this).val();
+      });
+
+      $("#builderCopyText").on("click", function(){
+        const text = builderOrderText();
+        copyText(text);
+      });
+
+      $("#builderWhatsapp").on("click", function(){
+        const text = builderOrderText();
+        window.open(buildWhatsappUrl(text), "_blank");
+      });
+
+      $("#builderReset").on("click", function(){
+        resetBuilder();
+        showToast("Builder sıfırlandı.", "bi-arrow-counterclockwise");
+      });
+
+      // Render catalog
+      renderCatalog();
+
+      // If opened with hash for product, scroll + hint
+      if(window.location.hash.startsWith("#p-")){
+        // slight delay so DOM is ready
+        setTimeout(()=>{
+          const el = document.querySelector(window.location.hash);
+          if(el) {
+            el.scrollIntoView({behavior:"smooth", block:"start"});
+            showToast("Ürün linki açıldı.", "bi-link-45deg");
+          }
+        }, 150);
+      }
+    });
+  </script>
+</body>
+</html>
